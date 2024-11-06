@@ -1,0 +1,125 @@
+<div class="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
+  <h2 class="text-2xl font-bold text-center mb-6">User Profile Edit</h2>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <input type="hidden" formControlName="id" />
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700">First Name</label>
+      <input
+        formControlName="firstName"
+        type="text"
+        id="firstName"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <div
+        *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched"
+        class="text-red-500 text-sm mt-1"
+      >
+        This field is required
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700">Last Name</label>
+      <input
+        formControlName="lastName"
+        type="text"
+        id="lastName"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <div
+        *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched"
+        class="text-red-500 text-sm mt-1"
+      >
+        This field is required
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700">Email</label>
+      <input
+        formControlName="email"
+        type="email"
+        id="email"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder=" "
+      />
+      <div
+        *ngIf="
+          form.get('email')?.invalid &&
+          (form.get('email')?.dirty || form.get('email')?.touched)
+        "
+        class="text-red-500 text-sm mt-1"
+      >
+        <span *ngIf="form.get('email')?.hasError('required')">
+          This field is required
+        </span>
+        <span *ngIf="form.get('email')?.hasError('email')">
+          Please enter a valid email address
+        </span>
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700"
+        >Phone Number</label
+      >
+      <input
+        formControlName="phoneNumber"
+        type="text"
+        id="phoneNumber"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <div
+        *ngIf="
+          form.get('phoneNumber')?.invalid && form.get('phoneNumber')?.touched
+        "
+        class="text-red-500 text-sm mt-1"
+      >
+        Please enter only numbers
+      </div>
+    </div>
+    <div class="mb-4">
+      <label
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        for="default_size"
+        >Profile Picture</label
+      >
+      <input
+        id="img"
+        type="file"
+        (change)="onFileChange($event)"
+        class="block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+        id="default_size"
+        type="file"
+      />
+    </div>
+    <div *ngIf="imageUrl" class="mb-4">
+      <img
+        [src]="imageUrl"
+        alt="Profile Picture"
+        class="w-32 h-32 rounded-full mx-auto"
+      />
+    </div>
+    <div>
+      <button
+        [disabled]="form.invalid"
+        type="submit"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded"
+      >
+        Save
+      </button>
+      <button
+        type="button"
+        class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+<div *ngIf="isLoading" class="flex justify-center mt-4">
+  <div
+    class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"
+  ></div>
+</div>
+<div *ngIf="isUpdated" class="text-green-500 text-center mt-4">
+  User updated successfully!
+</div>
+<div *ngIf="isNotUpdated" class="text-red-500 text-center mt-4">Failed !</div>

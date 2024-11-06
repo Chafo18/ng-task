@@ -1,0 +1,12 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "firstName": "default",
+      "lastName": "default",
+      "email": "default@gmail.com",
+      "phoneNumber": "124314",
+      "img": ""
+    }
+  ]
+}
